@@ -1,0 +1,19 @@
+server:
+  error:
+    include-stacktrace: never
+springdoc:
+  swagger-ui:
+    path: /documentation
+    syntax-highlight:
+      theme: arta
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${ISSUER_URI:https://issuer.com}
+          jwk-set-uri: ${JWK_SET_URI:https://issuer.com/jwks}
+  data:
+    mongodb:
+      uri: ${MONGODB_URI:mongodb://yummzy:securityPassword@localhost:27017/yummzy}
+      auto-index-creation: true
