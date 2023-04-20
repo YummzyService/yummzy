@@ -1,9 +1,9 @@
-FROM openjdk:11-slim as builder
+FROM openjdk:17.0.1-jdk-slim as builder
 WORKDIR /buid
 COPY . .
 RUN chmod +x gradlew && ./gradlew bootJar -x testClasses
 
-FROM openjdk:11-slim
+FROM openjdk:17.0.1-jdk-slim
 WORKDIR /app
 RUN groupadd yummzy && useradd -ms /bin/bash -g yummzy yummzy
 USER yummzy
