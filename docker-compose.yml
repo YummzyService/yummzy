@@ -1,0 +1,54 @@
+version: "3.3"
+services:
+
+  backend:
+    container_name: backend
+    restart: always
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    ports:
+      - "21000:8080"
+    environment:
+#      ISSUER_URI: https://authorization.yummzy.pythontop.xyz/auth/realms/yummzy
+#      JWK_SET_URI: https://authorization.yummzy.pythontop.xyz/auth/realms/yummzy/protocol/openid-connect/certs
+      MONGODB_URI: mongodb+srv://yummzy:palanucy2022@yummzy.ao8oq.mongodb.net/yummzy?retryWrites=true&w=majority
+
+      ISSUER_URI: https://cognito-idp.eu-central-1.amazonaws.com/eu-central-1_CpaRfTHas
+      JWK_SET_URI: https://cognito-idp.eu-central-1.amazonaws.com/eu-central-1_CpaRfTHas/.well-known/jwks.json
+#      DB_HOST: db
+#      DB_PORT: 27017
+#      DB_USERNAME: root
+#      DB_PASSWORD: pass
+#      DB_DATABASE: yummzy
+#    depends_on:
+#      - db
+
+#  db:
+#    container_name: db
+#    image: mongo
+#    restart: always
+#    ports:
+#      - "27017:27017"
+#    environment:
+#      MONGO_INITDB_DATABASE: yummzy
+#      MONGO_INITDB_ROOT_USERNAME: root
+#      MONGO_INITDB_ROOT_PASSWORD: pass
+#    volumes:
+#      - ./db-data:/data/db
+
+#create mongodb_test container
+#
+#docker run -d -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=password --name mongodb --net mongo-network mongo
+#
+
+#create mongo-express container
+#
+#docker run -d -p 8081:8081 -e ME_CONFIG_MONGODB_ADMINUSERNAME=admin -e ME_CONFIG_MONGODB_ADMINPASSWORD=password --net mongo-network --name mongo-express -e ME_CONFIG_MONGODB_SERVER=mongodb mongo-express
+#  docker run -it --rm --network some-network mongo \
+#  mongosh --host some-mongo \
+#  -u admin \
+#  -p password \
+#  --authenticationDatabase admin \
+#  yummzy
+#
