@@ -1,4 +1,4 @@
-package ua.com.yummzy.exception;
+package ua.com.yummzy.common.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

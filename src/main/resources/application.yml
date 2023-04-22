@@ -9,7 +9,7 @@ springdoc:
 spring:
   security:
     oauth2:
-      resourceserver:
+      resource-server:
         jwt:
           issuer-uri: ${ISSUER_URI:https://issuer.com}
           jwk-set-uri: ${JWK_SET_URI:https://issuer.com/jwks}

@@ -1,4 +1,4 @@
-package ua.com.yummzy.config;
+package ua.com.yummzy.configuration;
 
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
@@ -13,7 +13,7 @@ import java.util.List;
 
 @Configuration
 @SecurityScheme(name = "bearer", type = SecuritySchemeType.HTTP, scheme = "bearer", in = SecuritySchemeIn.HEADER)
-public class SwaggerConfig {
+public class SwaggerConfiguration {
     @Bean
     public OpenAPI springShopOpenAPI() {
         var localhost = new Server();

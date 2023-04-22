@@ -1,4 +1,4 @@
-package ua.com.yummzy.common.rest.response;
+package ua.com.yummzy.common.rest;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

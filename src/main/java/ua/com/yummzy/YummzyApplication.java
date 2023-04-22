@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.mongodb.config.EnableMongoAuditing;
 
+//TODO: remove all commented code
 @SpringBootApplication
 //@RequiredArgsConstructor
 @EnableMongoAuditing
@@ -20,7 +21,7 @@ public class YummzyApplication /*implements ApplicationRunner*/ {
 //        var random = new Random();
 //        var restaurants = restaurantRepository.findAll();
 //        var existDishes = dishRepository.findAll();
-//        List<Dish> finalDishes = new ArrayList<>();
+//        List<DishDocument> finalDishes = new ArrayList<>();
 //
 //        for (var dish : existDishes) {
 //            dish.setRestaurant(restaurants.get(random.nextInt(restaurants.size())));
@@ -43,8 +44,8 @@ public class YummzyApplication /*implements ApplicationRunner*/ {
 //        dishRepository.save(createDish("d8", Currency.UAH, BigDecimal.valueOf(100), "desc8", r3));
 //    }
 
-//    private Restaurant createRestaurant(String name, String ownerName, String desc, Set<String> phones, Set<String> addresses) {
-//        return Restaurant.builder()
+//    private RestaurantDocument createRestaurant(String name, String ownerName, String desc, Set<String> phones, Set<String> addresses) {
+//        return RestaurantDocument.builder()
 //                .name(name)
 //                .description(desc)
 //                .phones(phones)
@@ -53,19 +54,19 @@ public class YummzyApplication /*implements ApplicationRunner*/ {
 //                .build();
 //    }
 //
-//    private Dish createDish(String name, Currency currency, BigDecimal price, String desc, Restaurant restaurant) {
-//        return Dish.builder()
+//    private DishDocument createDish(String name, Currency currency, BigDecimal price, String desc, RestaurantDocument restaurant) {
+//        return DishDocument.builder()
 //                .name(name)
 //                .currency(currency)
 //                .price(price)
 //                .description(desc)
 //                .restaurant(restaurant)
 //                .images(List.of(
-//                        DishImage.builder()
+//                        DishDocumentImage.builder()
 //                                .position(1)
 //                                .imageUrl("https://yummzy-dishes-images.s3.eu-central-1.amazonaws.com/dish4.jpg")
 //                                .build(),
-//                        DishImage.builder()
+//                        DishDocumentImage.builder()
 //                                .position(2)
 //                                .imageUrl("https://yummzy-dishes-images.s3.eu-central-1.amazonaws.com/dish1.jpeg")
 //                                .build()

@@ -1,4 +1,4 @@
-package ua.com.yummzy.config;
+package ua.com.yummzy.configuration;
 
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -13,7 +13,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig {
+public class SecurityConfiguration {
 
     private static final String[] MATCHERS = {
             "/documentation/**",

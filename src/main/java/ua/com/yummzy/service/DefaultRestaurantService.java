@@ -4,11 +4,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import ua.com.yummzy.dto.DishDto;
-import ua.com.yummzy.dto.RestaurantDto;
-import ua.com.yummzy.exception.NotFoundException;
-import ua.com.yummzy.mapper.DishMapper;
-import ua.com.yummzy.mapper.RestaurantsMapper;
+import ua.com.yummzy.common.exception.NotFoundException;
+import ua.com.yummzy.common.mapper.DishMapper;
+import ua.com.yummzy.common.mapper.RestaurantsMapper;
+import ua.com.yummzy.common.rest.DishRestResponse;
+import ua.com.yummzy.common.rest.RestaurantRestResponse;
 import ua.com.yummzy.repository.DishRepository;
 import ua.com.yummzy.repository.RestaurantRepository;
 
@@ -25,23 +25,23 @@ public class DefaultRestaurantService implements RestaurantService {
     private final DishMapper dishMapper;
 
     @Override
-    public List<RestaurantDto> getAllRestaurants(Pageable pageable) {
+    public List<RestaurantRestResponse> getAllRestaurants(Pageable pageable) {
         return restaurantRepository.findAll(pageable).getContent().stream()
-                .map(restaurantsMapper::toDto)
+                .map(restaurantsMapper::toResponse)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public RestaurantDto getRestaurantById(String id) {
+    public RestaurantRestResponse getRestaurantById(String id) {
         var restaurant = restaurantRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Restaurant with id " + id + " not found!"));
-        return restaurantsMapper.toDto(restaurant);
+                .orElseThrow(() -> new NotFoundException("RestaurantDocument with id " + id + " not found!"));
+        return restaurantsMapper.toResponse(restaurant);
     }
 
     @Override
-    public List<DishDto> getDishesByRestaurantId(String id, Pageable pageable) {
+    public List<DishRestResponse> getDishesByRestaurantId(String id, Pageable pageable) {
         return dishRepository.findAllByRestaurantId(id, pageable).stream()
-                .map(dishMapper::toDto)
+                .map(dishMapper::toResponse)
                 .collect(Collectors.toList());
     }
 }

@@ -1,10 +1,10 @@
-package ua.com.yummzy.utils;
+package ua.com.yummzy.common;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public final class Endpoints {
+public final class Constants {
     public static final String API = "/api";
     private static final String VERSION = "/v1";
     public static final String API_PREFIX = API + VERSION;

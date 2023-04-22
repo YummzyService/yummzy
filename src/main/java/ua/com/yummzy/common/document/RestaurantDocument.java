@@ -21,7 +21,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 @Document(value = "restaurant")
-public class Restaurant {
+public class RestaurantDocument {
     @MongoId(FieldType.OBJECT_ID)
     private String id;
     @Field(name = "name")

@@ -14,7 +14,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @NoArgsConstructor
 @Builder
 @Document(value = "image")
-public class DishImage {
+public class DishImageDocument {
     @Field(name = "position")
     private int position;
     @Field(name = "image_url")

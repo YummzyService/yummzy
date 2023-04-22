@@ -26,14 +26,15 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Document(value = "dish")
-public class Dish {
+public class DishDocument {
     @MongoId(FieldType.OBJECT_ID)
     private String id;
     @Field(name = "name")
     private String name;
     @Field(name = "description")
     private String description;
-    private List<DishImage> images = new ArrayList<>();
+    @Builder.Default
+    private List<DishImageDocument> images = new ArrayList<>();
     @Field(name = "price", targetType = FieldType.DECIMAL128)
     private BigDecimal price;
     @Field(name = "currency")
@@ -41,7 +42,7 @@ public class Dish {
     @Indexed
     @Field(name = "restaurant_id", targetType = FieldType.OBJECT_ID)
     @DocumentReference(lazy = true)
-    private Restaurant restaurant;
+    private RestaurantDocument restaurant;
     @CreatedDate
     @Field(name = "create_at")
     private LocalDateTime createAt;

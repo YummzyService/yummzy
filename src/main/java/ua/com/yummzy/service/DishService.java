@@ -1,11 +1,11 @@
 package ua.com.yummzy.service;
 
-import ua.com.yummzy.dto.DishDto;
+import ua.com.yummzy.common.rest.DishRestResponse;
 
 import java.util.List;
 
 public interface DishService {
-    DishDto getById(String id);
+    DishRestResponse getById(String id);
 
-    List<DishDto> getAllRandom(int size);
+    List<DishRestResponse> getAllRandom(int size);
 }

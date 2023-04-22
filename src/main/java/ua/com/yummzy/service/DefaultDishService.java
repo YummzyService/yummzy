@@ -2,10 +2,10 @@ package ua.com.yummzy.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ua.com.yummzy.dto.DishDto;
-import ua.com.yummzy.exception.NotFoundException;
-import ua.com.yummzy.mapper.DishMapper;
-import ua.com.yummzy.mapper.RestaurantsMapper;
+import ua.com.yummzy.common.exception.NotFoundException;
+import ua.com.yummzy.common.mapper.DishMapper;
+import ua.com.yummzy.common.mapper.RestaurantsMapper;
+import ua.com.yummzy.common.rest.DishRestResponse;
 import ua.com.yummzy.repository.DishRepository;
 
 import java.util.List;
@@ -19,22 +19,22 @@ public class DefaultDishService implements DishService {
     private final RestaurantsMapper restaurantsMapper;
 
     @Override
-    public DishDto getById(String id) {
+    public DishRestResponse getById(String id) {
         var dish = dishRepository.findById(id).orElseThrow(() ->
-                new NotFoundException("Dish with id " + id + " not found!"));
-        var dishDto = dishMapper.toDto(dish);
+                new NotFoundException("DishDocument with id " + id + " not found!"));
+        var dishDto = dishMapper.toResponse(dish);
         if (dish.getRestaurant() == null) {
             return dishDto;
         }
-        var restaurantDto = restaurantsMapper.toDto(dish.getRestaurant());
-        dishDto.setRestaurantDto(restaurantDto);
+        var restaurantDto = restaurantsMapper.toResponse(dish.getRestaurant());
+        dishDto.setRestaurantResponse(restaurantDto);
         return dishDto;
     }
 
     @Override
-    public List<DishDto> getAllRandom(int size) {
+    public List<DishRestResponse> getAllRandom(int size) {
         return dishRepository.findAllRandom(size).stream()
-                .map(dishMapper::toDto)
+                .map(dishMapper::toResponse)
                 .collect(Collectors.toList());
     }
 }
