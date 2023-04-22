@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import ua.com.yummzy.dto.DishDto;
+import ua.com.yummzy.common.rest.DishDto;
 import ua.com.yummzy.service.DishService;
-import ua.com.yummzy.utils.Endpoints;
+import ua.com.yummzy.common.Constants;
 
 import java.util.List;
 
 @RestController
-@RequestMapping(Endpoints.DISH)
+@RequestMapping(Constants.DISH)
 @RequiredArgsConstructor
 @SecurityRequirement(name = "bearer")
 public class DishController {

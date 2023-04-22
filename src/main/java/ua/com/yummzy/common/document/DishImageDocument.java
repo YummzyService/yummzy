@@ -1,4 +1,4 @@
-package ua.com.yummzy.document;
+package ua.com.yummzy.common.document;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ua.com.yummzy.dto.DishDto;
-import ua.com.yummzy.dto.RestaurantDto;
+import ua.com.yummzy.common.rest.DishDto;
+import ua.com.yummzy.common.rest.RestaurantDto;
 import ua.com.yummzy.service.RestaurantService;
-import ua.com.yummzy.utils.Endpoints;
+import ua.com.yummzy.common.Constants;
 
 import java.util.List;
 
 @RestController
-@RequestMapping(Endpoints.RESTAURANT)
+@RequestMapping(Constants.RESTAURANT)
 @RequiredArgsConstructor
 @SecurityRequirement(name = "bearer")
 public class RestaurantController {

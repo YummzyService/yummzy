@@ -1,4 +1,4 @@
-package ua.com.yummzy.dto;
+package ua.com.yummzy.common.rest.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -12,7 +12,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RestaurantDto {
+public class RestaurantRestResponse {
     @JsonProperty(value = "id")
     private String id;
     @JsonProperty(value = "name")
