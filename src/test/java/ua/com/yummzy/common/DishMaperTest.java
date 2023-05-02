@@ -7,10 +7,10 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.MockBeans;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.gridfs.GridFsTemplate;
-import ua.com.yummzy.common.mapper.DishMapper;
-import ua.com.yummzy.common.rest.DishRestResponse;
-import ua.com.yummzy.controller.DishController;
-import ua.com.yummzy.controller.RestaurantController;
+import ua.com.yummzy.mapper.DishMapper;
+import ua.com.yummzy.rest.dto.DishDTO;
+import ua.com.yummzy.rest.controller.DishController;
+import ua.com.yummzy.rest.controller.RestaurantController;
 import ua.com.yummzy.repository.DishRepository;
 import ua.com.yummzy.repository.RestaurantRepository;
 import ua.com.yummzy.service.DishService;
@@ -35,7 +35,7 @@ public class DishMaperTest {
 
     @Test
     void fakeTestCase_shouldReturnNonNull_dishDocument() {
-        var actual = dishMapper.toDocument(new DishRestResponse());
+        var actual = dishMapper.toDocument(new DishDTO());
         assertNotNull(actual);
     }
 }

@@ -1,4 +1,4 @@
-package ua.com.yummzy.common.rest;
+package ua.com.yummzy.rest.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class DishImageRestResponse {
+public class DishImageDto {
     @JsonProperty(value = "position")
     private int position;
     @JsonProperty(value = "imageUrl")

@@ -1,4 +1,4 @@
-package ua.com.yummzy.common.meta;
+package ua.com.yummzy.meta;
 
 public enum Currency {
     UAH,

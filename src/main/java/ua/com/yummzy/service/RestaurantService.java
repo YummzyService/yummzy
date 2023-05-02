@@ -1,15 +1,20 @@
 package ua.com.yummzy.service;
 
 import org.springframework.data.domain.Pageable;
-import ua.com.yummzy.common.rest.DishRestResponse;
-import ua.com.yummzy.common.rest.RestaurantRestResponse;
+import ua.com.yummzy.rest.dto.DishDTO;
+import ua.com.yummzy.rest.dto.RestaurantDTO;
 
 import java.util.List;
 
 public interface RestaurantService {
-    List<RestaurantRestResponse> getAllRestaurants(Pageable pageable);
 
-    RestaurantRestResponse getRestaurantById(String id);
+    void createRestaurant(RestaurantDTO body);
 
-    List<DishRestResponse> getDishesByRestaurantId(String id, Pageable pageable);
+    void updateRestaurant(RestaurantDTO body, String id);
+
+    List<RestaurantDTO> getRestaurants(Pageable pageable);
+
+    RestaurantDTO getRestaurantById(String id);
+
+    List<DishDTO> getDishesByRestaurantId(String id, Pageable pageable);
 }

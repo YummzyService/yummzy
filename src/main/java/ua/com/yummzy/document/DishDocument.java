@@ -1,4 +1,4 @@
-package ua.com.yummzy.common.document;
+package ua.com.yummzy.document;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,33 +7,42 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.FieldType;
 import org.springframework.data.mongodb.core.mapping.MongoId;
+import ua.com.yummzy.meta.Currency;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Document(value = "restaurant")
-public class RestaurantDocument {
+@Document(value = "dish")
+public class DishDocument {
     @MongoId(FieldType.OBJECT_ID)
     private String id;
     @Field(name = "name")
     private String name;
     @Field(name = "description")
     private String description;
-    @Field(name = "addresses")
-    private Set<String> addresses;
-    @Field(name = "phones")
-    private Set<String> phones;
-    @Field(name = "ownerName")
-    private String ownerName;
+    @Builder.Default
+    private List<DishImageDocument> images = new ArrayList<>();
+    @Field(name = "price", targetType = FieldType.DECIMAL128)
+    private BigDecimal price;
+    @Field(name = "currency")
+    private Currency currency;
+    @Indexed
+    @Field(name = "restaurant_id", targetType = FieldType.OBJECT_ID)
+    @DocumentReference(lazy = true)
+    private RestaurantDocument restaurant;
     @CreatedDate
     @Field(name = "create_at")
     private LocalDateTime createAt;
