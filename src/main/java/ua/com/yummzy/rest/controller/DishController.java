@@ -25,13 +25,13 @@ import java.util.List;
 public class DishController {
     private final DishService dishService;
 
-    @ResponseStatus(value = HttpStatus.CREATED, reason = "DishDocument was created in DB")
+    @ResponseStatus(value = HttpStatus.CREATED, reason = "Dish document was created in DB")
     @PostMapping("/create")
     public void create(@RequestBody DishDTO body) {
         dishService.create(body);
     }
 
-    @ResponseStatus(value = HttpStatus.OK, reason = "DishDocument was updated")
+    @ResponseStatus(value = HttpStatus.OK, reason = "Dish document was updated")
     @PutMapping("/{id}")
     public void update(@RequestBody DishDTO body, @PathVariable("id") String id) {
         dishService.update(body, id);

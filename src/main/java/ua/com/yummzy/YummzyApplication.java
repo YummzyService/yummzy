@@ -2,13 +2,12 @@ package ua.com.yummzy;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationArguments;
-import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.mongodb.config.EnableMongoAuditing;
-import ua.com.yummzy.document.DishDocument;
-import ua.com.yummzy.document.DishImageDocument;
-import ua.com.yummzy.document.RestaurantDocument;
+import ua.com.yummzy.model.Dish;
+import ua.com.yummzy.model.DishImage;
+import ua.com.yummzy.model.Restaurant;
 import ua.com.yummzy.meta.Currency;
 import ua.com.yummzy.repository.DishRepository;
 import ua.com.yummzy.repository.RestaurantRepository;
@@ -41,7 +40,7 @@ public class YummzyApplication {
         var restaurants = restaurantRepository.findAll();
         var existDishes = dishRepository.findAll();
 
-        List<DishDocument> finalDishes = new ArrayList<>();
+        List<Dish> finalDishes = new ArrayList<>();
 
         for (var dish : existDishes) {
             dish.setRestaurant(restaurants.get(rand.nextInt(restaurants.size())));
@@ -52,7 +51,7 @@ public class YummzyApplication {
 
 
         Stream.iterate(0, i -> i < 10, i -> i + 1)
-                .map(i -> RestaurantDocument.builder()
+                .map(i -> Restaurant.builder()
                         .name(valueOf(i))
                         .ownerName(format("Owner restaurant name %s", i))
                         .description(format("Restaurant description %s", i))
@@ -61,19 +60,19 @@ public class YummzyApplication {
                         .build())
                 .map(restaurantRepository::save)
                 .flatMap(r -> Stream.iterate(1, j -> j < 5, j -> j + 1)
-                        .map(j -> DishDocument.builder()
+                        .map(j -> Dish.builder()
                                 .name(format("Dish name %s_%s", j, r.getName()))
                                 .currency(Currency.UAH)
                                 .price(BigDecimal.valueOf(rand.nextInt(1000 - 100) + 100))
                                 .description(format("Dish description %s_%s", j, r.getName()))
                                 .restaurant(r)
                                 .images(List.of(
-                                        DishImageDocument.builder()
+                                        DishImage.builder()
                                                 .position(1)
                                                 .imageUrl(format("https://yummzy-dishes-images.s3.eu-central-1.amazonaws.com/dish4_%s_%s.jpg",
                                                         j, r.getName()))
                                                 .build(),
-                                        DishImageDocument.builder()
+                                        DishImage.builder()
                                                 .position(2)
                                                 .imageUrl(format("https://yummzy-dishes-images.s3.eu-central-1.amazonaws.com/dish1_%s_%s.jpeg",
                                                         j, r.getName()))

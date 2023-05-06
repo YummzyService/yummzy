@@ -47,7 +47,7 @@ public class DefaultRestaurantService implements RestaurantService {
     @Override
     public RestaurantDTO getRestaurantById(String id) {
         var restaurant = restaurantRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("RestaurantDocument with id " + id + " not found!"));
+                .orElseThrow(() -> new NotFoundException("Restaurant document with id " + id + " not found!"));
         return restaurantMapper.toDto(restaurant);
     }
 

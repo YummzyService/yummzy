@@ -1,4 +1,4 @@
-package ua.com.yummzy.document;
+package ua.com.yummzy.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,7 +14,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @NoArgsConstructor
 @Builder
 @Document(value = "image")
-public class DishImageDocument {
+public class DishImage {
     @Field(name = "position")
     private int position;
     @Field(name = "image_url")

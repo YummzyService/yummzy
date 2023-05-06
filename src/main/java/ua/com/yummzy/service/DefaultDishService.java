@@ -2,7 +2,7 @@ package ua.com.yummzy.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ua.com.yummzy.document.DishDocument;
+import ua.com.yummzy.model.Dish;
 import ua.com.yummzy.exception.NotFoundException;
 import ua.com.yummzy.mapper.DishMapper;
 import ua.com.yummzy.mapper.RestaurantMapper;
@@ -45,7 +45,7 @@ public class DefaultDishService implements DishService {
     @Override
     public DishDTO getById(String id) {
         var existDocument = dishRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("DishDocument with id " + id + " not found!"));
+                .orElseThrow(() -> new NotFoundException("Dish document with id " + id + " not found!"));
         var dishDto = dishMapper.toDto(existDocument);
 
         //TODO: Fix it (remove), this mechanism should work without it
@@ -64,12 +64,12 @@ public class DefaultDishService implements DishService {
     }
 
     //TODO: Fix it (remove), this mechanism should work without it
-    private void setRestaurantIfPresent(DishDocument dishDocument, RestaurantDTO restaurantDto) {
+    private void setRestaurantIfPresent(Dish dish, RestaurantDTO restaurantDto) {
         Optional.ofNullable(restaurantDto)
                 .ifPresent(dto -> {
-                    var restaurantDocument = restaurantMapper.toDocument(dto);
-                    restaurantDocument.setId(restaurantDto.getId());
-                    dishDocument.setRestaurant(restaurantDocument);
+                    var doc = restaurantMapper.toDocument(dto);
+                    doc.setId(restaurantDto.getId());
+                    dish.setRestaurant(doc);
                 });
     }
 }
