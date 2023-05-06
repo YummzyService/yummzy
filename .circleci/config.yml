@@ -16,11 +16,11 @@ jobs:
           aws-region: AWS_REGION
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
           from: bucket
-          to: s3://my-s3-bucket-name/prefix
+          to: s3://yummzy/prefix
       - aws-s3/copy:
           arguments: '--dryrun'
           from: bucket/build_asset.txt
-          to: s3://my-s3-bucket-name
+          to: s3://yummzy
 workflows:
   s3-example:
     jobs:
