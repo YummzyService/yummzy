@@ -8,9 +8,9 @@ jobs:
       - run:
           name: Installing AWS CLI
           command: |
-            sudo apt-get update
-            sudo apt install python3-pip
-            sudo pip3 install awsebcli --upgrade
+            apt-get update
+            install python3-pip
+            pip3 install awsebcli --upgrade
       - run:
           cd ./app
       - persist_to_workspace:
