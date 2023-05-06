@@ -1,8 +1,8 @@
 version: 2.1
 jobs:
   build:
-    machine:
-      - image: ubuntu-2004:202010-01
+    docker:
+      - image: alpine:latest
     steps:
       - checkout
       - run:
@@ -18,8 +18,8 @@ jobs:
           paths:
             - .
   test:
-    machine:
-      - image: ubuntu-2004:202010-01
+    docker:
+      - image: alpine:latest
     steps:
       - attach_workspace:
           at: .
@@ -30,8 +30,8 @@ jobs:
           paths:
             - .
   deploy:
-    machine:
-      - image: ubuntu-2004:202010-01
+    docker:
+      - image: alpine:latest
     steps:
       - attach_workspace:
           at: .
