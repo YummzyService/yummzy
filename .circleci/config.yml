@@ -23,8 +23,10 @@ jobs:
 workflows:
   build_and_test:
     jobs:
-      - build
       - test
+      - build:
+          requires:
+            - test
 #  # fetching code from the repo
 #  Fetch-Code:
 #    docker:
