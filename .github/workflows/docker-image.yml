@@ -34,11 +34,11 @@ jobs:
     - uses: actions/checkout@v3  
     - name: Docker Hub Login
       run: |
-        docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWORD}}
+        sudo docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWORD}}
 
     - name: Pull and Run
       run: |
         touch .env
         echo "${{secrets.STAGE_ENV_FILE}}" > .env
-        docker pull ${{secrets.DOCKER_USER}}/yummzy:${{needs.build-and-push.outputs.tag}}
-        docker run --env-file=.env -d -p 80:8080 yummzy:${{needs.build-and-push.outputs.tag}}
+        sudo docker pull ${{secrets.DOCKER_USER}}/yummzy:${{needs.build-and-push.outputs.tag}}
+        sudo docker run --env-file=.env -d -p 80:8080 yummzy:${{needs.build-and-push.outputs.tag}}
