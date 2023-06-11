@@ -7,6 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       tag: ${{steps.setup-tag.outputs.tag}}
+    
     steps:
     - uses: actions/checkout@v3
     - name: Docker Hub Login
@@ -26,8 +27,9 @@ jobs:
         docker push ${{secrets.DOCKER_USER}}/yummzy
 
   deploy:
-    needs: build-and-push
     runs-on: self-hosted
+    needs: build-and-push
+    
     steps:
     - uses: actions/checkout@v3  
     - name: Docker Hub Login
@@ -37,6 +39,6 @@ jobs:
     - name: Pull and Run
       run: |
         touch .env
-        echo "${{ secrets.STAGE_ENV_FILE }}" > .env
+        echo "${{secrets.STAGE_ENV_FILE}}" > .env
         docker pull ${{secrets.DOCKER_USER}}/yummzy:${{needs.build-and-push.outputs.tag}}
         docker run --env-file=.env -d -p 80:8080 yummzy:${{needs.build-and-push.outputs.tag}}
