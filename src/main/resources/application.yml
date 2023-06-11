@@ -15,5 +15,5 @@ spring:
           jwk-set-uri: ${JWK_SET_URI:https://issuer.com/jwks}
   data:
     mongodb:
-      uri: ${MONGODB_URI:mongodb://yummzy:securityPassword@localhost:27017/yummzy}
+      uri: ${MONGODB_URI:mongodb://yummzy:password@localhost:27017/yummzy}
       auto-index-creation: true
