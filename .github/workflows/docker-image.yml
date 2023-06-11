@@ -41,4 +41,4 @@ jobs:
         touch .env
         echo "${{secrets.STAGE_ENV_FILE}}" > .env
         sudo docker pull ${{secrets.DOCKER_USER}}/yummzy:${{needs.build-and-push.outputs.tag}}
-        sudo docker run --env-file=.env -d -p 80:8080 yummzy:${{needs.build-and-push.outputs.tag}}
+        sudo docker run --env-file=.env -d -p 80:8080 ${{secrets.DOCKER_USER}}/yummzy:${{needs.build-and-push.outputs.tag}}
