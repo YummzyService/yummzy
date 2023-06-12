@@ -38,6 +38,9 @@ jobs:
           echo "${{secrets.STAGE_ENV_FILE}}" > .env
       - name: Pull image from Docker Hub
         run: |
+          sudo docker stop $(sudo docker ps -a -q)
+          sudo docker rm -f $(sudo docker ps -a -q)
+          sudo docker rmi -f $(sudo docker images -a -q)
           sudo docker pull ${{secrets.DOCKER_USER}}/yummzy:${{needs.build-and-push.outputs.tag}}
       - name: Run Docker Container
         run: |
