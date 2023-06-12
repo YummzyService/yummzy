@@ -9,37 +9,38 @@ jobs:
       tag: ${{steps.setup-tag.outputs.tag}}
     steps:
     - uses: actions/checkout@v3
+
     - name: Docker Hub Login
-      run: |
-        docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWORD}}
+      run: docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWORD}}
+
     - name: Setup TAG
       id: setup-tag
       run: echo "tag=$(date +%s)" >> "$GITHUB_OUTPUT"
+
     - name: Build the Docker image
-      run: |
-        docker build . --file Dockerfile --tag ${{secrets.DOCKER_USER}}/yummzy:${{steps.setup-tag.outputs.tag}}
+      run: docker build . --file Dockerfile --tag ${{secrets.DOCKER_USER}}/yummzy:${{steps.setup-tag.outputs.tag}}
+
     - name: Push to Docker Hub Repo
-      run: |
-        docker push ${{secrets.DOCKER_USER}}/yummzy:${{steps.setup-tag.outputs.tag}}
+      run: docker push ${{secrets.DOCKER_USER}}/yummzy:${{steps.setup-tag.outputs.tag}}
 
   deploy:
     runs-on: self-hosted
     needs: build-and-push
     steps:
     - uses: actions/checkout@v3
+
     - name: Store the Secrets
-    - run: |
-        touch .env
-        echo "${{secrets.STAGE_ENV_FILE}}" > .env
+    - run: touch .env && echo "${{secrets.STAGE_ENV_FILE}}" > .env
+
     - name: Login to Docker Hub
-      run: |
-        sudo docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWORD}}
+      run: sudo docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWORD}}
+
     - name: Pull image from Docker Hub
-      run: |
-        sudo docker stop yummzy || true
-        sudo docker rm yummzy || true
-        sudo docker rmi -f $(docker images -a -q)
-        sudo docker pull ${{secrets.DOCKER_USER}}/yummzy:${{needs.build-and-push.outputs.tag}}
+      run: sudo docker stop yummzy || true
+    - run: sudo docker rm yummzy || true
+    - run: sudo docker rmi -f $(docker images -a -q)
+    - run: sudo docker pull ${{secrets.DOCKER_USER}}/yummzy:${{needs.build-and-push.outputs.tag}}
+
     - name: Run Docker Container
       run: |
         sudo docker run --name yummzy --env-file=.env -d -p 80:8080 ${{secrets.DOCKER_USER}}/yummzy:${{needs.build-and-push.outputs.tag}}
