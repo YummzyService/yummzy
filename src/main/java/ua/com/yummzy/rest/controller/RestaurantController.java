@@ -23,7 +23,7 @@ import ua.com.yummzy.Constants;
 import java.util.List;
 
 @RestController
-@RequestMapping(Constants.RESTAURANT)
+@RequestMapping(Constants.RESTAURANT_ROUTE)
 @RequiredArgsConstructor
 @SecurityRequirement(name = "bearer")
 public class RestaurantController {

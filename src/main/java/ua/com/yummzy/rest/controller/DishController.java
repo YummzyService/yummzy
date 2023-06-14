@@ -19,7 +19,7 @@ import ua.com.yummzy.Constants;
 import java.util.List;
 
 @RestController
-@RequestMapping(Constants.DISH)
+@RequestMapping(Constants.DISH_ROUTE)
 @RequiredArgsConstructor
 @SecurityRequirement(name = "bearer")
 public class DishController {
