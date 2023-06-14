@@ -19,7 +19,8 @@ public class SecurityConfiguration {
             "/documentation/**",
             "/swagger-ui/**",
             "/favicon.ico",
-            "/v3/api-docs/**"
+            "/v3/api-docs/**",
+            "/actuator/**"
     };
 
     @Bean
@@ -29,8 +30,7 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .exceptionHandling()
                 .and()
-                .authorizeHttpRequests(authRequests -> authRequests
-                        .requestMatchers(MATCHERS).permitAll()
+                .authorizeHttpRequests(auth -> auth.requestMatchers(MATCHERS).permitAll()
                         .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
