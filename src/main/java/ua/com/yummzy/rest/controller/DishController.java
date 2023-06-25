@@ -14,12 +14,13 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import ua.com.yummzy.rest.dto.DishDTO;
 import ua.com.yummzy.service.DishService;
-import ua.com.yummzy.Constants;
 
 import java.util.List;
 
+import static ua.com.yummzy.data.Constants.API_VERSION;
+
 @RestController
-@RequestMapping(Constants.DISH_ROUTE)
+@RequestMapping(API_VERSION + "/dishes")
 @RequiredArgsConstructor
 @SecurityRequirement(name = "bearer")
 public class DishController {

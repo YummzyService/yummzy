@@ -18,12 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 import ua.com.yummzy.rest.dto.DishDTO;
 import ua.com.yummzy.rest.dto.RestaurantDTO;
 import ua.com.yummzy.service.RestaurantService;
-import ua.com.yummzy.Constants;
 
 import java.util.List;
 
+import static ua.com.yummzy.data.Constants.API_VERSION;
+
 @RestController
-@RequestMapping(Constants.RESTAURANT_ROUTE)
+@RequestMapping(API_VERSION + "/restaurants")
 @RequiredArgsConstructor
 @SecurityRequirement(name = "bearer")
 public class RestaurantController {

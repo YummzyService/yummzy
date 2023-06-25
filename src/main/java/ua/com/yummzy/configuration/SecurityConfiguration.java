@@ -7,33 +7,30 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
+
+import static org.springframework.security.config.Customizer.withDefaults;
 
 @RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
 
-    private static final String[] MATCHERS = {
-            "/documentation/**",
-            "/swagger-ui/**",
-            "/favicon.ico",
-            "/v3/api-docs/**",
-            "/actuator/**"
-    };
-
     @Bean
     @SneakyThrows
     public SecurityFilterChain securityFilterChain(HttpSecurity http) {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
-                .exceptionHandling()
-                .and()
-                .authorizeHttpRequests(auth -> auth.requestMatchers(MATCHERS).permitAll()
+                .authorizeHttpRequests(auth -> auth.requestMatchers(
+                        "/documentation/**",
+                                "/swagger-ui/**",
+                                "/favicon.ico",
+                                "/v3/api-docs/**",
+                                "/actuator/**").permitAll()
                         .anyRequest().authenticated()
                 )
-                .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
+                .oauth2ResourceServer(c -> c.jwt(withDefaults()))
+                .exceptionHandling(c -> c.accessDeniedPage("/errors/access-denied"))
                 .build();
     }
 
