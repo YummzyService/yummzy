@@ -2,6 +2,7 @@ server:
   error:
     include-stacktrace: never
 springdoc:
+  show-actuator: true
   swagger-ui:
     path: /documentation
     syntax-highlight:
